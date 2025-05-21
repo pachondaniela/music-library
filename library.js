@@ -30,10 +30,17 @@ const library = {
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
-const printPlaylists = function() {
+const printPlaylists = function(library) {
 
+       const p01 = library.playlists.p01  
+       const p02 = library.playlists.p02
+
+       console.log(`p01: ${p01.name}: - ${p01.tracks.length} tracks`)
+       console.log(`p02: ${p02.name}: - ${p02.tracks.length} tracks`)
+       
 }
 
+printPlaylists(library)  //Test out function. 
 
 // prints a list of all tracks, using the following format:
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
