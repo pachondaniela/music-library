@@ -67,14 +67,40 @@ printTracks(library) // Test function above
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 const printPlaylist = function(playlistId) {
+  const chosenPlaylist = library.playlists[playlistId]
 
+  if(!chosenPlaylist){
+    console.log("Playlist doesnt exist!");
+    return;
+  }
+  console.log(`${chosenPlaylist.id}: ${chosenPlaylist.name} - ${chosenPlaylist.tracks.length} tracks`)
+ 
+  const listOfTracks = chosenPlaylist.tracks
+  for(let track of listOfTracks){
+   
+    console.log(`${library.tracks[track].id}: ${library.tracks[track].name} by ${library.tracks[track].artist} (${library.tracks[track].album})`)
+  }
 }
+
+printPlaylist("p01")
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
+  const chosenPlaylist = library.playlists[playlistId].tracks
+  chosenPlaylist.push(library.tracks[trackId].id)
 
+  console.log(chosenPlaylist)
 }
+
+addTrackToPlaylist("t03","p01")
+addTrackToPlaylist("t02","p02")
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 // generates a unique id
@@ -86,14 +112,38 @@ const generateUid = function() {
 
 // adds a track to the library
 const addTrack = function(name, artist, album) {
-
+  const tracksObject = library.tracks
+  const id = generateUid()
+  tracksObject[id] = {
+    id: id,
+    name: name,
+    artist: artist,
+    album: album
 }
+console.log(tracksObject)
+}
+
+
+addTrack("Pies Descalzos", "Shakira", "Ojos Asi")
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
-
+ 
+  const playlistObject =  library.playlists
+  const id = generateUid()
+  playlistObject[id] = {
+    id: id,
+    name: name,
+    tracks: ["t01" , "t03"]
+  }
+  console.log(playlistObject)
 }
+
+
+addPlaylist("Ojos Asi")
 
 
 // STRETCH:
